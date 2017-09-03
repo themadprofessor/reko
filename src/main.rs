@@ -131,7 +131,7 @@ fn parse_oct<I>(chars: &mut Peekable<I>) -> std::result::Result<char, String> wh
     let mut buff = String::with_capacity(2);
     for _ in 0..3 {
         let res = if let Some(c) = chars.peek() {
-            if c >= &'0' || c <= &'7' {
+            if c >= &'0' && c <= &'7' {
                 true
             } else {
                 false
