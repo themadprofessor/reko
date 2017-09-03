@@ -1,0 +1,19 @@
+[package]
+name = "reko"
+version = "0.1.0"
+authors = ["Stuart <stu@reilly-family.co.uk>"]
+description = "Rust implementation of echo(1)"
+
+[dependencies]
+clap = "2.26"
+easybench = "0.1"
+itertools = "0.6"
+
+[profile.release]
+opt-level = 3
+debug = true
+rpath = false
+lto = true
+debug-assertions = false
+codegen-units = 1
+panic = 'unwind'
