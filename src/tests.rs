@@ -179,3 +179,44 @@ fn test_parse_oct_fail_invalid() {
     assert!(res.is_err());
     assert_eq!(res.unwrap_err(), "");
 }
+
+#[test]
+fn test_parse_hex_limited() {
+    test!();
+    let mut data = vec!['A'].into_iter().peekable();
+    let res = parse_hex(&mut data);
+    assert!(res.is_ok());
+    assert_eq!(res.unwrap(), '\u{000A}');
+    assert!(data.peek().is_none());
+}
+#[test]
+fn test_parse_oct_limited() {
+    test!();
+    let mut data = vec!['5'].into_iter().peekable();
+    let res = parse_hex(&mut data);
+    assert!(res.is_ok());
+    assert_eq!(res.unwrap(), '\u{0005}');
+    assert!(data.peek().is_none());
+}
+
+
+#[test]
+fn test_parse_hex_limited_extra() {
+    test!();
+    let mut data = vec!['A', 'G'].into_iter().peekable();
+    let res = parse_hex(&mut data);
+    assert!(res.is_ok());
+    assert_eq!(res.unwrap(), '\u{000A}');
+    assert!(data.peek().is_some());
+    assert_eq!(data.next().unwrap(), 'G')
+}
+#[test]
+fn test_parse_oct_limited_extra() {
+    test!();
+    let mut data = vec!['5', '9'].into_iter().peekable();
+    let res = parse_oct(&mut data);
+    assert!(res.is_ok());
+    assert_eq!(res.unwrap(), '\u{0005}');
+    assert!(data.peek().is_some());
+    assert_eq!(data.next().unwrap(), '9');
+}

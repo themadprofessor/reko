@@ -115,7 +115,7 @@ fn parse_hex<I>(chars: &mut Peekable<I>) -> std::result::Result<char, String> wh
         if res {
             buff.push(chars.next().unwrap())
         } else {
-            return Err(buff);
+            break;
         }
     }
 
@@ -142,7 +142,7 @@ fn parse_oct<I>(chars: &mut Peekable<I>) -> std::result::Result<char, String> wh
         if res {
             buff.push(chars.next().unwrap())
         } else {
-            return Err(buff);
+            break;
         }
     }
 
