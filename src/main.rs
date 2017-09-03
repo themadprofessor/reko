@@ -51,7 +51,7 @@ fn main() {
 fn build_string(config: &Config, args: &[String]) -> String {
     let mut tmp = String::with_capacity(args.iter().map(String::len).sum::<usize>() + args.len());
     for arg in args {
-        if tmp.starts_with('$') {
+        if arg.starts_with('$') {
             tmp += &env::var_os(&arg[1..]).unwrap_or_default().to_string_lossy()
         } else {
             tmp += &arg;
