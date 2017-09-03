@@ -41,7 +41,7 @@ fn main() {
         let result = if config.interp {
             escape(result.as_ref())
         } else {
-            Cow::Borrowed(result)
+            Cow::Owned(result)
         };
         let mut out = io::stdout();
         out.write_all(result.as_bytes()).expect("Failed to output data");
